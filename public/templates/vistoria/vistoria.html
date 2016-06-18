@@ -1,0 +1,70 @@
+<widget-header titulo = 'VISTORIAS'></widget-header>
+<div class="corpo">
+		<nav class="navbar navbar-inverse">
+  			<div class="container">
+		   		<ul class="nav nav-pills">
+		  			<li role="presentation"  class="active"><a href="">Gerar anexo</a></li>
+                    <li ng-click="vm.logoff()"><a href="/#/" class="logoff">logoff</a></li>
+                    <li role="presentation"><a href="" class="usuario">{{vm.user}}</a></li>
+                    <li role="presentation"><a href="" class="usuario">{{vm.ordem}}</a></li>
+		  		</ul>
+  			</div>
+		</nav>
+		
+  		<form name="myForm">
+  		<div class="form-group">
+      		<input type="text" class="form-control" ng-model='vm.inscricao' placeholder="inscrição municipal" maxlength="8">
+          </div>
+
+          <div>
+      		<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="vm.buscar(vm.inscricao)">Buscar</button>
+      	</div>
+      	</form>
+
+          <div class="conteiner_iframe">
+               <center>
+                  <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="vm.mostrarLoading">
+                  </span>
+              </center>
+          </div>
+          
+
+      	<div class="conteiner_iframe" ng-show="vm.mostrarIframe">
+
+              <div>
+
+              <input type="button" class="btn btn-primary btn-lg btn-block" value="{{vm.showSCCA}}" data-toggle="collapse" data-target="#ficha" ng-click="vm.showFicha()"/>
+
+              <iframe id="ficha" ng-src="{{vm.buscarInscricao}}" class="collapse"></iframe>
+          
+              </div>
+          </div>
+            <div ng-show="vm.showOpcoes">
+                <div class="conteiner_iframe">
+                <label class="fonteBranca">OPÇÕES</label>
+                        <select ng-model='vm.opcao' class="form-control" ng-options="item for item in vm.opcoes track by item" ng-change="vm.prosseguir(vm.opcao)"></select>
+                </div>
+
+                <div class="conteiner_iframe" ng-show="vm.mostrarSalvar">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="vm.salvar()">Salvar</button>
+                </div>
+
+                <div class="conteiner_iframe fonteBranca" ng-show="vm.mostraInfracoes">
+
+                    <input type="button" class="btn btn-primary btn-lg btn-block" value="{{vm.showMultas}}" data-toggle="collapse" data-target="#infracoes" ng-click="vm.showInfracoes()"/>
+
+                    <div id="infracoes" class="collapse">
+                          <div  ng-repeat="inciso in vm.incisos">
+                              <div ng-include="vm.subTemplate"></div>
+                          </div>
+                    </div>
+
+                    <div class="conteiner_iframe" ng-show="vm.showSalvarInfracoes">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="vm.salvarInfracoes()">Salvar</button>
+                    </div>
+
+                </div>
+            </div>
+</div>
+
+           
