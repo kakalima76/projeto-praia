@@ -1,0 +1,50 @@
+<ul class="list-group">
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.ordem"></span>
+	Ordem
+	</li>
+
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.nome"></span>
+	Agente
+	</li>
+
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.matricula"></span>
+	Matricula
+	</li>
+
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.im"></span>
+	Inscrição Municipal
+	</li>
+
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.titular"></span>
+	Titular
+	</li>
+
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.cpf"></span>
+	CPF		
+	</li>
+
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.conformidade"></span>
+	Status		
+	</li>
+
+
+	<div ng-repeat="multa in tipo.multas">
+		<li class="list-group-item">
+		<span class="badge" ng-bind="'Artigo: ' + multa.artigo + ' Inciso: ' + multa.inciso"></span>
+		Autuação		
+		</li>
+	</div>
+
+	<li class="list-group-item">
+	<span class="badge" ng-bind="tipo.pontos"></span>
+	Pontos		
+	</li>
+
+</ul>

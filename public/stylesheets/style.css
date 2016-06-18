@@ -199,7 +199,7 @@ tr{
 }
 .even{
   background-color: #836FFF;
-  color: white;
+  color: #FFFF00;
   -webkit-print-color-adjust: exact;
 }
 
@@ -289,4 +289,15 @@ iframe{
   padding-top: 2px;
   padding-bottom: 2px;
   vertical-align: middle;
+}
+
+.oddResultado{
+  background-color: #00008B;
+  color: blue;
+  -webkit-print-color-adjust: exact;
+}
+.evenResultado{
+  background-color: #836FFF;
+  color: red;
+  -webkit-print-color-adjust: exact;
 }

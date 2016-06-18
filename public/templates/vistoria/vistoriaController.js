@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('vistoriaController',['$window', 'sccaService', 'incisosService', function($window, sccaService, incisosService){
+.controller('vistoriaController',['$window', 'sccaService', 'incisosService', 'autorizadoFactory', function($window, sccaService, incisosService, autorizadoFactory){
 	var vm = this;
 	vm.showSCCA = 'Mostrar Ficha';
 	vm.showMultas = 'Mostrar Infrações';
@@ -27,7 +27,6 @@ angular.module('app')
 
 	vm.logoff = function(){
 		$window.localStorage.removeItem('usuario');
-		console.log('teste');
 	}
 
 	vm.buscar = function(inscricao){
@@ -46,7 +45,13 @@ angular.module('app')
 				vm.mostrarIframe = true;
 				vm.buscarInscricao = 'http://scca.rio.rj.gov.br/index.php/online?im=' + inscricao;
 				vm.showOpcoes = true;
-
+				var nome = $window.localStorage['usuario'];
+				var matricula = $window.localStorage['matricula'];
+				var ordem = parseInt($window.localStorage['ordem']);
+				var data = $window.localStorage['data'];
+				autorizadoFactory.setHeader(nome, matricula, ordem, data);
+				autorizadoFactory.setDados(vm.inscricao, ficha.nome, ficha.cpf);
+				console.log(autorizadoFactory.get());
 			});
 			promise.catch(function(err){
 				alert(err);
@@ -86,9 +91,16 @@ angular.module('app')
 		vm.opcao = null;
 		vm.mostrarIframe = false;
 		vm.inscricao = null;
+		vm.incisos.forEach(function(valor){
+			if(valor.escolhido){
+				valor.escolhido = false;
+			}
+		})
+		vm.salvarLoading = false;
 	}
 
 	vm.salvarInfracoes = function(){
+		vm.salvarLoading = true;
 		function filtro(value){
 			if(value.escolhido === true){
 				return true;
@@ -96,14 +108,32 @@ angular.module('app')
 		}
 
 		var escolhidos = vm.incisos.filter(filtro);
+		var pontos = 0;
+		escolhidos.forEach(function(obj){
+			pontos += obj.pontos;
+		})
 
-		console.log(escolhidos);
-		reseta();
+		autorizadoFactory.setVistoria(vm.opcao, escolhidos, pontos);
+		var promise = autorizadoFactory.salvar(autorizadoFactory.get());
+		promise.then(function(){
+			reseta();
+		}).catch(function(){
+			alert('problemas no autorizadoFactory.salvar()');
+		})	
 
 	}
 
 	vm.salvar = function(){
-		reseta();
+		vm.salvarLoading = true;
+		var multas = [];
+		var pontos = 0;
+		autorizadoFactory.setVistoria(vm.opcao, multas, pontos)
+		var promise = autorizadoFactory.salvar(autorizadoFactory.get());
+		promise.then(function(){
+			reseta();
+		}).catch(function(){
+			alert('problemas no autorizadoFactory.salvar()');
+		})
 	}
 
 

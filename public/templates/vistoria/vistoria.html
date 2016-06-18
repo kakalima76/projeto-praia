@@ -1,17 +1,26 @@
-<widget-header titulo = 'VISTORIAS'></widget-header>
+<widget-header titulo = 'VISTORIA'></widget-header>
 <div class="corpo">
 		<nav class="navbar navbar-inverse">
   			<div class="container">
 		   		<ul class="nav nav-pills">
-		  			<li role="presentation"  class="active"><a href="">Gerar anexo</a></li>
-                    <li ng-click="vm.logoff()"><a href="/#/" class="logoff">logoff</a></li>
-                    <li role="presentation"><a href="" class="usuario">{{vm.user}}</a></li>
-                    <li role="presentation"><a href="" class="usuario">{{vm.ordem}}</a></li>
+		  			<li role="presentation"  class="active"><a href="">Vistoria</a></li>
+            <li role="presentation"><a href="/#/resultado">Resultados</a></li>
+            <li ng-click="vm.logoff()"><a href="/#/" class="logoff">logoff</a></li>
+            <li role="presentation"><a href="" class="usuario">{{vm.user}}</a></li>
+            <li role="presentation"><a href="" class="usuario">{{vm.ordem}}</a></li>
 		  		</ul>
   			</div>
 		</nav>
 		
   		<form name="myForm">
+
+       <div class="conteiner_iframe fonteBranca" ng-show="vm.salvarLoading">
+               <center>
+                  <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                  <span>salvando...</span>
+              </center>
+          </div>
+
   		<div class="form-group">
       		<input type="text" class="form-control" ng-model='vm.inscricao' placeholder="inscrição municipal" maxlength="8">
           </div>

@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('loginController', ['$window', 'agentesService', '$location', function($window, agentesService, $location){
+.controller('loginController', ['$window', 'agentesService', '$location', 'autorizadoFactory', function($window, agentesService, $location, autorizadoFactory){
 	var vm = this;
 	vm.showError = false;
 	vm.user = null;
@@ -42,7 +42,8 @@ angular.module('app')
 					 		$window.localStorage['usuario'] = usuario.data.nome;
 					 		$window.localStorage['ordem'] = usuario.data[montaData()].ordem;
 					 		$window.localStorage['chefe'] = usuario.data.chefe;
-					 		montaData();
+					 		$window.localStorage['matricula'] = vm.user;
+					 		$window.localStorage['data'] = montaData();
 					 		$location.path('vistoria');
 					 	}else{
 					 		vm.showError = true;

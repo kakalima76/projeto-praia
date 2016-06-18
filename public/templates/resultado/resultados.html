@@ -1,0 +1,39 @@
+<widget-header titulo = 'RESULTADOS'></widget-header>
+<div class="corpo">
+		<nav class="navbar navbar-inverse">
+  			<div class="container">
+		   		<ul class="nav nav-pills">
+		  			<li role="presentation"><a href="/#/vistoria">Vistoria</a></li>
+		  			<li role="presentation"  class="active"><a href="">Resultados</a></li>
+                    <li ng-click="vm.logoff()"><a href="/#/" class="logoff">logoff</a></li>
+                    <li role="presentation"><a href="" class="usuario">{{vm.user}}</a></li>
+                    <li role="presentation"><a href="" class="usuario">{{vm.ordem}}</a></li>
+		  		</ul>
+  			</div>
+		</nav>
+
+<form name="myForm">
+		<div class="form-group">
+    		<input class="form-control" ng-model='vm.date' placeholder="busque pela data" datepicker>
+        </div>
+
+        <label class="fonteBranca">FILTRO</label>
+		  		<select ng-model='vm.opcao' class="form-control" ng-options="item for item in vm.opcoes track by item" ng-change="vm.pegaOpcao(vm.opcao)"></select>
+
+        <div class="conteiner_iframe">
+    		<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="vm.buscar(vm.date)">Buscar</button>
+    	</div>
+    	</form>
+
+    	<div class="bordaBranca">
+    		<center>
+    			<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" ng-show="vm.mostrarLoading">
+    			</span>
+    		</center>
+
+    		<div ng-repeat="tipo in vm.vistorias" ng-class-odd="'oddResultado'" ng-class-even="'evenResultado'">
+    			<div ng-include="vm.sub_resultado"></div>
+    		</div>
+
+		</div>
+</div>
