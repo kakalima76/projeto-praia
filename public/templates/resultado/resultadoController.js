@@ -11,6 +11,10 @@ angular.module('app')
     	return (val === undefined || val == null || val.length <= 0) ? true : false;
 	}
 
+	vm.logoff = function(){
+		$window.localStorage.removeItem('usuario');
+	}
+
 	vm.buscar = function(date){
 		if(!isEmpty(vm.date) && !isEmpty(vm.opcao)){
 
