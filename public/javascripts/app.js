@@ -33,6 +33,30 @@ angular.module('app', ['ngRoute', 'ui.bootstrap'])
 			}]
 		}
 	})
+
+	.when('/estatistica', {
+		templateUrl: 'templates/estatistica/estatistica.html',
+		controller: 'estatisticaController',
+		controllerAs: 'vm',
+		resolve:{
+			auth: ['authService', '$window', function(authService, $window){
+				var promise = authService.autentica($window.localStorage['usuario']);
+				return promise;
+			}]
+		}
+	})
+
+	.when('/busca', {
+		templateUrl: 'templates/busca/busca.html',
+		controller: 'buscaController',
+		controllerAs: 'vm',
+		resolve:{
+			auth: ['authService', '$window', function(authService, $window){
+				var promise = authService.autentica($window.localStorage['usuario']);
+				return promise;
+			}]
+		}
+	})
 	
 
 	.otherwise({redirectTo: '/'});

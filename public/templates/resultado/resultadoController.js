@@ -4,8 +4,8 @@ angular.module('app')
 	vm.user = $window.localStorage['usuario'];
 	vm.ordem = 'ORDEM Nº: ' + $window.localStorage['ordem'].toString();
 	vm.vistorias = [];
-	vm.sub_resultado = 'templates/sub_templates/sub_resultado.html'
-	vm.opcoes = ['todos','conformidade', 'inconformidade', 'ausente', 'terceiros'];
+	vm.sub_resultado = 'templates/sub_templates/sub_resultado.html';
+	vm.opcoes = ['todos','conformidade','inconformidade','ausente', 'terceiros','preposto'];
 
 	function isEmpty(val){
     	return (val === undefined || val == null || val.length <= 0) ? true : false;

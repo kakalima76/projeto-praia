@@ -6,7 +6,7 @@ angular.module('app')
 	vm.incisos = incisosService.get();
 	vm.mostrarIframe = false;
 	vm.mostrarLoading = false;
-	vm.opcoes = ['conformidade', 'inconformidade', 'ausente', 'terceiros'];
+	vm.opcoes = ['conformidade', 'inconformidade', 'ausente', 'terceiros','preposto'];
 	vm.user = $window.localStorage['usuario'];
 	vm.ordem = 'ORDEM Nº: ' + $window.localStorage['ordem'].toString();
 	vm.subTemplate = 'templates/sub_templates/sub_vistoria.html';
@@ -64,7 +64,7 @@ angular.module('app')
 		vm.mostrarSalvar = false;
 		vm.mostraInfracoes = false;
 		if(!isEmpty(escolha)){
-			if(escolha === 'conformidade' || escolha === 'ausente'){
+			if(escolha === 'conformidade' || escolha === 'ausente' || escolha === 'preposto'){
 				vm.mostrarSalvar = true;
 			}else{
 				vm.mostraInfracoes = true;
