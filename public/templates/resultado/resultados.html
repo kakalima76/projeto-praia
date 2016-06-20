@@ -9,7 +9,8 @@
                     <li role="presentation"><a href="/#/busca">Fiscalizado</a></li>
                     <li ng-click="vm.logoff()"><a href="/#/" class="logoff">logoff</a></li>
                     <li role="presentation"><a href="" class="usuario">{{vm.user}}</a></li>
-                    <li role="presentation"><a href="" class="usuario">{{vm.ordem}}</a></li>
+                    <li role="presentation"><a href="/#/ordem" class="usuario">{{vm.ordem}}</a></li>
+                    <li role="presentation"><a href="" class="usuario">{{vm.local}}</a></li>
 		  		</ul>
   			</div>
 		</nav>
@@ -19,8 +20,11 @@
     		<input class="form-control" ng-model='vm.date' placeholder="busque pela data" datepicker>
         </div>
 
+        <label class="fonteBranca">LOCAL</label>
+          <select ng-model='vm.opcao' class="form-control" ng-options="item for item in vm.opcoes track by item" ng-change="vm.pegaOpcao(vm.opcao)"></select>
+
         <label class="fonteBranca">FILTRO</label>
-		  		<select ng-model='vm.opcao' class="form-control" ng-options="item for item in vm.opcoes track by item" ng-change="vm.pegaOpcao(vm.opcao)"></select>
+		  		<select ng-model='vm.tipo' class="form-control" ng-options="item for item in vm.tipos track by item" ng-change="vm.pegaOpcao(vm.opcao)"></select>
 
         <div class="conteiner_iframe">
     		<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="vm.buscar(vm.date)">Buscar</button>

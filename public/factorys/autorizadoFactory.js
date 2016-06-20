@@ -1,11 +1,12 @@
 angular.module('app')
 .factory('autorizadoFactory', ['$http', function($http){
 	var autorizado = {};
-	var setHeader = function(nome, matricula, ordem, data){
+	var setHeader = function(nome, matricula, ordem, data, local){
 		autorizado.nome = nome;
 		autorizado.matricula = matricula;
 		autorizado.ordem = ordem;
 		autorizado.data = data;
+		autorizado.local = local;
 	}
 
 	var setDados = function(im, titular, cpf){

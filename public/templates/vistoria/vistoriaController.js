@@ -8,6 +8,7 @@ angular.module('app')
 	vm.mostrarLoading = false;
 	vm.opcoes = ['conformidade', 'inconformidade', 'ausente', 'terceiros','preposto'];
 	vm.user = $window.localStorage['usuario'];
+	vm.local = $window.localStorage['local'];
 	vm.ordem = 'ORDEM Nº: ' + $window.localStorage['ordem'].toString();
 	vm.subTemplate = 'templates/sub_templates/sub_vistoria.html';
 	vm.showOpcoes = false;
@@ -49,8 +50,10 @@ angular.module('app')
 				var matricula = $window.localStorage['matricula'];
 				var ordem = parseInt($window.localStorage['ordem']);
 				var data = $window.localStorage['data'];
-				autorizadoFactory.setHeader(nome, matricula, ordem, data);
+				var local = $window.localStorage['local'];
+				autorizadoFactory.setHeader(nome, matricula, ordem, data, local);
 				autorizadoFactory.setDados(vm.inscricao, ficha.nome, ficha.cpf);
+
 				console.log(autorizadoFactory.get());
 			});
 			promise.catch(function(err){

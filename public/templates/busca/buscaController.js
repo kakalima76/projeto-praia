@@ -2,6 +2,7 @@ angular.module('app')
 .controller('buscaController', ['$window', 'autorizadoFactory', function($window, autorizadoFactory){
 	var vm = this;
 	vm.user = $window.localStorage['usuario'];
+	vm.local = $window.localStorage['local'];
 	vm.ordem = 'ORDEM Nº: ' + $window.localStorage['ordem'].toString();
 	vm.sub_busca = 'templates/sub_templates/sub_busca.html';
 	vm.data = [{mes: 'janeiro', id: '01'},{mes: 'fevereiro', id: '02'},{mes: 'março', id: '03'},{mes: 'abril', id: '04'},{mes: 'maio', id: '05'},{mes: 'junho', id: '06'},{mes: 'julho', id: '07'},{mes: 'agosto', id: '08'},{mes: 'setembro', id: '09'},{mes: 'outubro', id: '10'},{mes: 'novembro', id: '11'},{mes: 'dezembro', id: '12'}];

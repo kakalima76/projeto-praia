@@ -57,6 +57,18 @@ angular.module('app', ['ngRoute', 'ui.bootstrap'])
 			}]
 		}
 	})
+
+	.when('/ordem', {
+		templateUrl: 'templates/ordem/ordem.html',
+		controller: 'ordemController',
+		controllerAs: 'vm',
+		resolve:{
+			auth: ['authService', '$window', function(authService, $window){
+				var promise = authService.autentica($window.localStorage['usuario']);
+				return promise;
+			}]
+		}
+	})
 	
 
 	.otherwise({redirectTo: '/'});

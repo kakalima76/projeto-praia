@@ -1,11 +1,13 @@
 angular.module('app')
-.controller('resultadoController', ['$window', 'autorizadoFactory', function($window, autorizadoFactory){
+.controller('resultadoController', ['$window', 'autorizadoFactory', 'localService', function($window, autorizadoFactory, localService){
 	var vm = this;
 	vm.user = $window.localStorage['usuario'];
+	vm.local = $window.localStorage['local'];
 	vm.ordem = 'ORDEM Nº: ' + $window.localStorage['ordem'].toString();
 	vm.vistorias = [];
 	vm.sub_resultado = 'templates/sub_templates/sub_resultado.html';
-	vm.opcoes = ['todos','conformidade','inconformidade','ausente', 'terceiros','preposto'];
+	vm.tipos = ['todos','conformidade','inconformidade','ausente', 'terceiros','preposto'];
+	vm.opcoes = localService.get();
 
 	function isEmpty(val){
     	return (val === undefined || val == null || val.length <= 0) ? true : false;
@@ -16,7 +18,7 @@ angular.module('app')
 	}
 
 	vm.buscar = function(date){
-		if(!isEmpty(vm.date) && !isEmpty(vm.opcao)){
+		if(!isEmpty(vm.date) && !isEmpty(vm.tipo) && !isEmpty(vm.opcao)){
 
 			var data = date.replace(/(\/)+/g,'');
 			var filtro = function(obj){
@@ -26,7 +28,13 @@ angular.module('app')
 			}
 
 			var filtroOpcao = function(obj){
-				if(obj.conformidade === vm.opcao){
+				if(obj.conformidade === vm.tipo){
+					return true;
+				}
+			}
+
+			var filtrolocal = function(obj){
+				if(obj.local === vm.opcao){
 					return true;
 				}
 			}
@@ -44,14 +52,22 @@ angular.module('app')
 			vm.mostrarLoading = true;
 			var promise = autorizadoFactory.buscar();
 			promise.then(function(dados){
-				
-				if(vm.opcao === 'todos'){
-					vm.vistorias = dados.data.filter(filtro).sort(compare);
-				}else{
+
+				if(vm.tipo !== 'todos' && vm.opcao === 'TODOS'){
 					vm.vistorias = dados.data.filter(filtro);
 					vm.vistorias = vm.vistorias.filter(filtroOpcao).sort(compare);
+				}else if(vm.tipo === 'todos' && vm.opcao !== 'TODOS'){
+					vm.vistorias = dados.data.filter(filtro);
+					vm.vistorias = vm.vistorias.filter(filtrolocal).sort(compare);
+				}else if(vm.tipo !== 'todos' && vm.opcao !== 'TODOS'){
+					vm.vistorias = dados.data.filter(filtro);
+					vm.vistorias = vm.vistorias.filter(filtrolocal).sort(compare);
+					vm.vistorias = vm.vistorias.filter(filtrolocal).sort(compare);
+				}else{
+					vm.vistorias = dados.data.filter(filtro).sort(compare);
 				}
-				
+
+
 				vm.mostrarLoading = false;
 			})
 

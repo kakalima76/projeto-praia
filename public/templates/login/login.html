@@ -11,6 +11,9 @@
     		<label for="exampleInputEmail1">Usuario</label>
     			<input type="number" class="form-control" id="exampleInputEmail1" placeholder="Usuário" ng-model='vm.user'>
   		</div>
+
+      <label class="fonteBranca">Local</label>
+          <select ng-model='vm.opcao' class="form-control" ng-options="item for item in vm.opcoes track by item" ng-change="vm.pegaOpcao(vm.opcao)"></select>
   
   		<div class="form-group">
     			<label for="exampleInputPassword1 fonteBranca">Senha</label>
