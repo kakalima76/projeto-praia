@@ -61,7 +61,7 @@ angular.module('app')
 					vm.vistorias = vm.vistorias.filter(filtrolocal).sort(compare);
 				}else if(vm.tipo !== 'todos' && vm.opcao !== 'TODOS'){
 					vm.vistorias = dados.data.filter(filtro);
-					vm.vistorias = vm.vistorias.filter(filtrolocal).sort(compare);
+					vm.vistorias = vm.vistorias.filter(filtroOpcao).sort(compare);
 					vm.vistorias = vm.vistorias.filter(filtrolocal).sort(compare);
 				}else{
 					vm.vistorias = dados.data.filter(filtro).sort(compare);
